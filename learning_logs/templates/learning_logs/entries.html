@@ -1,0 +1,14 @@
+{% extends 'learning_logs/base.html' %}
+
+{% block page_header %}
+    <div class="container d-flex justify-content-between my-3">
+        <h1>All Entries</h1>
+        <a href="{% url 'learning_logs:add_entry' %}"><button class="btn btn-primary px-3">Add an Entry</button></a>
+    </div>
+{% endblock %}
+{% block content %}
+
+{% include 'learning_logs/entry.html' %}
+
+<p class="text-muted fs-6 fst-italic">Retrived <strong>{{ count }}</strong> records.</p>
+{% endblock %}

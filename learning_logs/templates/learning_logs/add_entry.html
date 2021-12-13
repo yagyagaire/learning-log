@@ -1,0 +1,16 @@
+{% extends 'learning_logs/base.html' %}
+{% load bootstrap5 %}
+
+{% block page_header %}
+    <h1>New Entry {% if topic %} in <a class="text-decoration-none fst-italic" href="{% url 'learning_logs:topic' topic.id %}">{{ topic.text }}</a>{% endif %}</h1>
+{% endblock page_header%}
+
+{% block content %}
+    <form method="POST" action="{% url 'learning_logs:add_entry' %}" id="entryForm" class="form">
+        {% csrf_token %}
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button class="btn btn-primary">Add Entry</button>
+        {% endbuttons %}
+    </form>
+{% endblock content%}

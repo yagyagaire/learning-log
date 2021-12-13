@@ -1,0 +1,66 @@
+{% load bootstrap5 %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Log</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    </style>
+</head>
+<body>
+    <div style="min-height: 100vh;">
+        <nav class="navbar navbar-expand-md navbar-light bg-light mb-4 border mx-0">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{% url 'learning_logs:index' %}">Learning Log</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a href="{% url 'learning_logs:topics' %}" class="nav-link">Topics</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{% url 'learning_logs:entries' %}" class="nav-link">Entries</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto">
+                        {% if user.is_authenticated %}
+                            <span class="navbar-text">Hello, {{ user.username }}!</span>
+                            <li class="nav-item">
+                                <a href="{% url 'users:logout' %}" class="nav-link"><button class="btn btn-sm px-3 btn-secondary">Log out</button></a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a href="{% url 'users:login' %}" class="nav-link fs-5">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url 'users:register' %}" class="nav-link"><button class="btn btn-primary px-3">Sign Up</button></a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="d-flex flex-column justify-content-end align-items-between">
+            <main role="main" class="container" style="min-height: 77vh;">
+                <div class="pb-2 mb-2 border-bottom">
+                    {% block page_header %}
+                    {% endblock page_header %}
+                </div>
+                <div>
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </main>   
+
+            <footer class="d-flex flex-wrap bg-light justify-content-center align-items-center py-3 border-top">
+                <p class="text-muted text-center">Copyright &copy; 2021. By <a href="https://www.yagyagaire.tk" class="text-decoration-none"><em>Yagya Gaire</em></a></p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

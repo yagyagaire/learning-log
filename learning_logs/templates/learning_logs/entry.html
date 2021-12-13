@@ -1,0 +1,18 @@
+{% block entry %}
+
+{% for entry in entries %}
+    <div class="card mb-3">
+        <h4 class="card-header fs-5">
+            {{ entry.date_added | date:'M d, Y H:i' }}
+            <small class="ms-5"><a href="{% url 'learning_logs:edit_entry' entry.id %}"><button class='btn btn-sm px-3 btn-outline-primary'>Edit Entry</button></a></small>
+        </h4>
+        <div class="card-body">
+            {{ entry.text | linebreaks }}
+        </div>
+    </div>
+    
+{% empty %}
+    <p class="fs-4">No entries found.</p>
+{% endfor %}
+
+{% endblock %}
